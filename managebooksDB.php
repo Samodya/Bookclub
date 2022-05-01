@@ -2,6 +2,14 @@
    require("Classes/BooksDB.php");
     session_start();
     $books=Book::GetBooks();
+
+    if (isset($_POST["btnEdit"])) {
+        echo $_POST["btnEdit"];
+    }
+
+    if (isset($_POST["btnDelete"])) {
+        Book::DeleteBooks($_POST["btnDelete"]);
+    }
     
     if(isset($_POST["btnSave"])){
 
@@ -68,28 +76,31 @@
 <body>
     <h1>Manage Books</h1>
 
-    <form action="" method="post" enctype="multipart/form-data" >
+    <form action="" method="post"  enctype="multipart/form-data" >
        <aside>
-       <ul style="list-style:none;">
+       <ul style="list-style:none;" class="bg-secondary">
             <li>Enter ISBN:</li>
             <li> <input type="text" name="txtISBN"
-            value=""> </li>
+                value=""> </li>
             <li>Enter Title:</li>
             <li> <input type="text" name="txtTitle" 
                 value=""> </li>
             <li>Author:</li>
             <li id="author"><input type="text" name="txtAuthor[]"
-            value=""> 
+                value=""> 
                 <button class="btn btn-warning btnAddauth" 
                 type="submit" name="btnAddAuth" 
                 onclick="AddAuthor()"><i class="bi bi-person-plus-fill"></i></button>
             </li>
             <li>Year:</li>
-            <li> <input type="year" name="txtYear" value="" require> </li>
+            <li> <input type="year" name="txtYear" 
+                value="" require> </li>
             <li>Price:</li>
-            <li> <input type="number" name="txtPrice" value="" require> </li>
+            <li> <input type="number" name="txtPrice" 
+                value="" require> </li>
             <li><i class="bi bi-pencil-fill"></i> Publisher:</li>
-            <li> <input type="text" name="txtPublish" value="" require> </li>
+            <li> <input type="text" name="txtPublish" 
+                value="" require> </li>
             <li>Cover:</li>
             <li>
             <label for="exampleFormControlFile1">Insert Picture form here!</label>
