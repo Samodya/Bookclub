@@ -2,13 +2,18 @@
    require("Classes/BooksDB.php");
     session_start();
     $books=Book::GetBooks();
-
+    $bEdit= new Book(null,null,null,null,null,null,null,null);
     if (isset($_POST["btnEdit"])) {
-        echo $_POST["btnEdit"];
+       $bEdit=$books[$_POST["btnEdit"]];
+       $_SESSION["book"]=$bEdit;
     }
 
     if (isset($_POST["btnDelete"])) {
-        Book::DeleteBooks($_POST["btnDelete"]);
+        try {
+            Book::DeleteBooks($_POST["btnDelete"]);
+        } catch (Exception $th) {
+            echo $th;
+        }
     }
     
     if(isset($_POST["btnSave"])){
@@ -81,10 +86,18 @@
        <ul style="list-style:none;" class="bg-secondary">
             <li>Enter ISBN:</li>
             <li> <input type="text" name="txtISBN"
-                value=""> </li>
+                value="<?php
+                    if($bEdit->GetISBN() != null){
+                       echo $bEdit->GetISBN();
+                    }
+                ?>"> </li>
             <li>Enter Title:</li>
             <li> <input type="text" name="txtTitle" 
-                value=""> </li>
+                value="<?php
+                    if($bEdit->GetTitle() != null){
+                       echo $bEdit->GetTitle();
+                    }
+                ?>"> </li>
             <li>Author:</li>
             <li id="author"><input type="text" name="txtAuthor[]"
                 value=""> 
@@ -94,20 +107,42 @@
             </li>
             <li>Year:</li>
             <li> <input type="year" name="txtYear" 
-                value="" require> </li>
+                value="<?php
+                    if($bEdit->GetYear() != null){
+                       echo $bEdit->GetYear();
+                    }
+                ?>" required> </li>
             <li>Price:</li>
             <li> <input type="number" name="txtPrice" 
-                value="" require> </li>
+                value="<?php
+                    if($bEdit->GetPrice() != null){
+                       echo $bEdit->GetPrice();
+                    }
+                ?>" required> </li>
             <li><i class="bi bi-pencil-fill"></i> Publisher:</li>
             <li> <input type="text" name="txtPublish" 
-                value="" require> </li>
+                value="<?php
+                    if($bEdit->GetPublisher() != null){
+                       echo $bEdit->GetPublisher();
+                    }
+                ?>" required> </li>
             <li>Cover:</li>
             <li>
             <label for="exampleFormControlFile1">Insert Picture form here!</label>
                  <input type="file" name="txtCover" class="form-control-file btn btn-danger" id="exampleFormControlFile1"><br>
+                 <?php
+                    if($bEdit->GetCover() != null){
+                       echo '<img src="'.$bEdit->GetCover().'" style="width:100px; height:100px;">';
+                    }
+                ?>
                  </li>
             <li>Description:</li>
             <li><textarea name="txtDescrip" cols="40" rows="10" >
+<?php
+if($bEdit->GetDescrip() != null){
+echo $bEdit->GetDescrip();
+}
+?>
             </textarea></li>
             <li><input class="btn btn-primary" type="submit" value="Save" name="btnSave">
                 <input class="btn btn-primary" type="submit" value="Update" name="btnPrint">
