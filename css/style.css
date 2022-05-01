@@ -1,0 +1,55 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+h1{
+    color: #0000ff;
+}
+
+form{
+    padding: 5px;
+    border-radius: 10px;
+}
+
+aside{
+    width: 30%;
+    margin-left: 10px;
+    border: solid 5px #7c2222;
+    float: left;
+}
+
+main{
+    width: 60%;
+    margin-left: 10px;
+    border: solid 5px #7c2222;
+    float: left;
+}
+
+ul li{
+    margin-top: 2px;
+}
+
+ul li input{
+    border: #7c2222 solid 2px;
+}
+
+.btnAddauth:hover{
+    background: #7c2222;
+    color: #f0f8ff;
+}
+
+table{
+    width: 100%;
+    margin:auto;
+}
+
+td,th{
+    margin: 5px;
+    border: #7c2222 2px solid;
+    padding: 2px;
+}
+
+
+
+.tb-btn{
+    margin: 1px;
+}
