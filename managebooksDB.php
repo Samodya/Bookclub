@@ -2,7 +2,8 @@
    require("Classes/BooksDB.php");
     session_start();
     $books=Book::GetBooks();
-    $bEdit= new Book(null,null,null,null,null,null,null,null);
+    $authors=array();
+    $bEdit= new Book(null,null,$authors,null,null,null,null,null);
     if (isset($_POST["btnEdit"])) {
        $bEdit=$books[$_POST["btnEdit"]];
        $_SESSION["book"]=$bEdit;
@@ -100,10 +101,22 @@
                 ?>"> </li>
             <li>Author:</li>
             <li id="author"><input type="text" name="txtAuthor[]"
-                value=""> 
+                value="<?php
+                    if($bEdit->GetAuthorCount() > 0){
+                       echo $bEdit->GetAuthor(0);
+                    }
+                ?>"> 
                 <button class="btn btn-warning btnAddauth" 
                 type="submit" name="btnAddAuth" 
                 onclick="AddAuthor()"><i class="bi bi-person-plus-fill"></i></button>
+                <?php
+                    if($bEdit->GetAuthorCount() > 1){
+                       for ($i=1; $i<$bEdit->GetAuthorCount();$i++){
+                        echo '<input type="text" name="txtAuthor[]"
+                        value="'.$bEdit->GetAuthor($i).'">';
+                       }
+                    }
+                ?>
             </li>
             <li>Year:</li>
             <li> <input type="year" name="txtYear" 

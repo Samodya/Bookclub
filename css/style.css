@@ -23,6 +23,9 @@ main{
     border: solid 5px #7c2222;
     float: left;
 }
+ul{
+    padding: 5px;
+}
 
 ul li{
     margin-top: 2px;
